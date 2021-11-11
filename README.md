@@ -19,4 +19,4 @@ Clone project to your local repository
 - Change all usernames and passwords in this file as You wish or left it as it is.
 - in root use command "mvnw clean package" for packaging a jar file from the code.
 - in root use command "docker compose up". It will pack images to docker containers and you will able to reach the App using hhtp requests.
-- for convinient use of the App there is Postman collection in root folder.
+- for convinient use of the App there is Postman collection in root folder, called "App.postman_collection.json".
