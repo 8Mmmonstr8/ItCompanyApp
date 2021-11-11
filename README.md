@@ -1,4 +1,5 @@
-# It Company App (Spring Boot & Postgres & FlyWay & Docker)
+# It Company App 
+## (Spring Boot & Postgres & FlyWay & Docker)
 
 ## Description
 
