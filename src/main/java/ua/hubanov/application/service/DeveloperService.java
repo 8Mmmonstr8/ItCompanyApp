@@ -1,16 +1,17 @@
 package ua.hubanov.application.service;
 
-import ua.hubanov.application.dto.DeveloperDTO;
+import ua.hubanov.application.entity.persons.Developer;
 
 import java.util.List;
 
 public interface DeveloperService {
 
-    List<DeveloperDTO> getAllDevelopers();
-    DeveloperDTO getDeveloperById(Long id);
-    DeveloperDTO save(DeveloperDTO newDeveloper);
-    DeveloperDTO update(Long id, DeveloperDTO developerDetails);
+    List<Developer> getAllDevelopers();
+    Developer getDeveloperById(Long id);
+    Developer save(Developer newDeveloper);
+    Developer update(Long id, Developer developerDetails);
     void delete(Long id);
 
-    DeveloperDTO addSkillToDeveloper(Long developerId, Long skillId, int level);
+    Developer addSkillToDeveloper(Long developerId, Long skillId, int level);
+    List<Developer> getSuitableDevelopersForProject(Long projectId);
 }

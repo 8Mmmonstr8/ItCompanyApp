@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.hubanov.application.entity.persons.Developer;
-import ua.hubanov.application.service.MainService;
+import ua.hubanov.application.dto.DeveloperDTO;
+import ua.hubanov.application.facade.DeveloperFacade;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    MainService mainService;
+    DeveloperFacade developerFacade;
 
     @GetMapping("/getSuitableDevForProject")
-    public ResponseEntity<List<Developer>> getSuitableDevelopersForProject(@RequestParam Long projectId) {
-        return new ResponseEntity<>(mainService.getSuitableDevelopersForProject(projectId), HttpStatus.OK);
+    public ResponseEntity<List<DeveloperDTO>> getSuitableDevelopersForProject(@RequestParam Long projectId) {
+        return new ResponseEntity<>(developerFacade.getSuitableDevelopersForProject(projectId), HttpStatus.OK);
     }
 }

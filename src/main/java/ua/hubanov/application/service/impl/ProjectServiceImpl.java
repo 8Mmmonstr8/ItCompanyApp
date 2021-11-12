@@ -1,9 +1,7 @@
 package ua.hubanov.application.service.impl;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.hubanov.application.dto.ProjectDTO;
 import ua.hubanov.application.entity.enums.Level;
 import ua.hubanov.application.entity.projects.Project;
 import ua.hubanov.application.entity.Skill;
@@ -15,7 +13,6 @@ import ua.hubanov.application.service.ProjectService;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -26,38 +23,30 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     SkillRepository skillRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
-
     @Override
-    public List<ProjectDTO> getAllProjects() {
-        return projectRepository.findAll().stream()
-                .map(project -> modelMapper.map(project, ProjectDTO.class))
-                .collect(Collectors.toList());
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
     }
 
     @Override
-    public ProjectDTO getProjectById(Long id) {
-        Project project = projectRepository.findById(id)
+    public Project getProjectById(Long id) {
+        return projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectException("No project with id: " + id));
-        return modelMapper.map(project, ProjectDTO.class);
     }
 
     @Override
-    public ProjectDTO save(ProjectDTO newProject) {
-        Project project = projectRepository.save(modelMapper.map(newProject, Project.class));
-        return modelMapper.map(project, ProjectDTO.class);
+    public Project save(Project newProject) {
+        return projectRepository.save(newProject);
     }
 
     @Override
-    public ProjectDTO update(Long id, ProjectDTO projectDetails) {
+    public Project update(Long id, Project projectDetails) {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectException("No project with id: " + id));
         project.setName(projectDetails.getName());
         project.setDescription(projectDetails.getDescription());
         project.setDurationInMonth(projectDetails.getDurationInMonth());
-        Project updatedProject = projectRepository.save(project);
-        return modelMapper.map(updatedProject, ProjectDTO.class);
+        return projectRepository.save(project);
     }
 
     @Override
@@ -67,7 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public ProjectDTO addSkillToProject(Long projectId, Long skillId, int level) {
+    public Project addSkillToProject(Long projectId, Long skillId, int level) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectException("No project with id: " + projectId));
         Skill skill = skillRepository.findById(skillId)
@@ -82,7 +71,6 @@ public class ProjectServiceImpl implements ProjectService {
 
         project.addSkill(skill, Level.of(level));
         skillRepository.save(skill);
-        Project updatedProject = projectRepository.save(project);
-        return modelMapper.map(updatedProject, ProjectDTO.class);
+        return projectRepository.save(project);
     }
 }

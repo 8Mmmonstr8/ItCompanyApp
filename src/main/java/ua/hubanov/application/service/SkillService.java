@@ -1,14 +1,14 @@
 package ua.hubanov.application.service;
 
-import ua.hubanov.application.dto.SkillDTO;
+import ua.hubanov.application.entity.Skill;
 
 import java.util.List;
 
 public interface SkillService {
 
-    List<SkillDTO> getAllSkills();
-    SkillDTO getSkillById(Long id);
-    SkillDTO save(SkillDTO newSkill);
-    SkillDTO update(Long id, SkillDTO skillDetails);
+    List<Skill> getAllSkills();
+    Skill getSkillById(Long id);
+    Skill save(Skill newSkill);
+    Skill update(Long id, Skill skillDetails);
     void delete(Long id);
 }
