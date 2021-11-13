@@ -1,17 +1,17 @@
 package ua.hubanov.application.service;
 
-import ua.hubanov.application.dto.ProjectDTO;
+import ua.hubanov.application.entity.projects.Project;
 
 import java.util.List;
 
 public interface ProjectService {
 
-    List<ProjectDTO> getAllProjects();
-    ProjectDTO getProjectById(Long id);
-    ProjectDTO save(ProjectDTO newProject);
-    ProjectDTO update(Long id, ProjectDTO projectDetails);
+    List<Project> getAllProjects();
+    Project getProjectById(Long id);
+    Project save(Project newProject);
+    Project update(Long id, Project projectDetails);
 
     void delete(Long id);
 
-    ProjectDTO addSkillToProject(Long projectId, Long skillId, int level);
+    Project addSkillToProject(Long projectId, Long skillId, int level);
 }
